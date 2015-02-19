@@ -24,9 +24,12 @@ import org.lwjgl.opengl.GL11;
 
 public class Main 
 {
+	
+	//Declare Variables & Objects
 	private static final int WIDTH = 512+64;
 	private static final int HEIGHT = 512+64;
 	private static GameBoard game;
+	
 	
 	public static void main(String [] args) throws IOException
 	{
@@ -65,11 +68,8 @@ public class Main
 	            GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
 	         
 	            GL11.glViewport(0,0,WIDTH, HEIGHT);
-//	        GL11.glMatrixMode(GL11.GL_MODELVIEW);
-//	 
 	        GL11.glMatrixMode(GL11.GL_PROJECTION);
 	        GL11.glLoadIdentity();
-	        //GL11.glOrtho(0, Display.getWidth(), 0, Display.getHeight(), 1, -1);
 	        GL11.glOrtho(0, WIDTH,  0, HEIGHT, 1, -1);
 	        GL11.glMatrixMode(GL11.GL_MODELVIEW);
 	        GL11.glDisable(GL_DEPTH_TEST);
@@ -116,8 +116,8 @@ public class Main
 		
 		game.render();
 		
-		Display.update();
-		Display.sync(60);
+		Display.update();				//Double Buffering
+		Display.sync(60);				//Sets Frame Rate to 60
 		glPopMatrix();
 	}
 

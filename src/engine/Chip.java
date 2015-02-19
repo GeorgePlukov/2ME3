@@ -2,6 +2,7 @@ package engine;
 
 public class Chip 
 {
+	//Declare Variables & Objects
 	private int x, y, sx, sy;
 	private char color;
 	private SpriteSheet s;
@@ -18,6 +19,7 @@ public class Chip
 	
 	public void render()
 	{
+		//Draw Appropriate Color Chip
 		if(color == 'b')
 		{
 			s.draw(x, y, 0, 0, true);

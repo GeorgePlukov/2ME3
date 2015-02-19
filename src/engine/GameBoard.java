@@ -6,9 +6,12 @@ import org.lwjgl.input.Mouse;
 
 public class GameBoard 
 {
+	
+	//Declare Variables & Objects
+	char selected;
 	SpriteSheet sheet;
 	Chip [][] chips;
-	char selected;
+
 	
 	public GameBoard()
 	{
@@ -26,8 +29,7 @@ public class GameBoard
 	
 	public void getInput()
 	{
-		//TODO: Check Mouse In Boxes & Selection
-		
+		//Highlight Selected
 		if(Mouse.getX() > 0 && Mouse.getY() > 0 && Mouse.getX() < 64 && Mouse.getY() < 64 && Mouse.isButtonDown(0))
 		{
 			selected = 'b';
@@ -36,6 +38,8 @@ public class GameBoard
 		{
 			selected = 'r';
 		}
+		
+		//Get Mouse Input for Game Board Tiles
 		for (int i = 64; i < 512; i+=64)
 		{
 			for(int j = 64; j < 512; j+=64)
@@ -61,8 +65,10 @@ public class GameBoard
 		
 	}
 	
+	//Render The Game Board With Tiles
 	public void render()
 	{
+		//Draws Board
 		for(int i =  1; i < 8; i++)
 		{
 			for(int j = 1; j < 8; j++)
@@ -71,8 +77,12 @@ public class GameBoard
 				sheet.draw(i*64, j*64, 2, 1, true);
 			}
 		}
+		
+		//Draws Chip Options
 		sheet.draw(0, 0, 0, 0, true);
 		sheet.draw(64*8, 0, 1, 0, true);
+		
+		//Draw Outline for Selected Chip
 		if(selected == 'b')
 		{
 			sheet.draw(0, 0, 0, 1, true);
@@ -82,6 +92,7 @@ public class GameBoard
 			sheet.draw(64*8, 0, 0, 1, true);
 		}
 		
+		//Draw Chips in Chip Matrix
 		for(int i = 0; i < chips.length; i++)
 		{
 			for(int j = 0; j < chips.length; j++)
