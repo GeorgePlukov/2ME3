@@ -29,4 +29,9 @@ public class Chip
 			s.draw(x, y, 1, 0, true);
 		}
 	}
+	
+	public char getColor()
+	{
+		return color;
+	}
 }

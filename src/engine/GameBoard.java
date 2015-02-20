@@ -9,6 +9,7 @@ public class GameBoard
 	
 	//Declare Variables & Objects
 	char selected;
+	boolean valid; 
 	SpriteSheet sheet;
 	Chip [][] chips;
 
@@ -62,7 +63,7 @@ public class GameBoard
 	
 	public void update()
 	{
-		
+		System.out.println(checkValid());
 	}
 	
 	//Render The Game Board With Tiles
@@ -101,5 +102,49 @@ public class GameBoard
 					chips[i][j].render();
 			}
 		}
+	}
+	
+	
+	public boolean checkValid()
+	{
+		return checkGravity() && checkChipNums();
+	}
+	
+	private boolean checkGravity()
+	{
+		for(int y = chips.length-1; y > 1; y--)
+		{
+			for(int x = 0; x < chips.length; x++)
+			{
+				if(chips[x][y] != null && chips[x][y-1] == null)
+					return false;
+				
+			}
+		}
+		
+		return true;
+	}
+	
+	private boolean checkChipNums()
+	{
+		int blueCount = 0, redCount = 0;
+		for(int i = 0; i < chips.length; i++)
+		{
+			for(int j = 0; j < chips.length; j++)
+			{
+				if(chips[i][j] != null)
+				{
+					if(chips[i][j].getColor() == 'b')
+						blueCount++;
+					else if(chips[i][j].getColor() == 'r')
+						redCount++;
+				}
+			}
+		}
+		if(blueCount == (redCount - 1) || redCount == (blueCount - 1))
+			return true;
+		if((blueCount == 1 && redCount == 0) || (redCount == 1 && blueCount == 0) || (redCount == 0 && blueCount == 0))
+			return true;
+		return false;
 	}
 }
