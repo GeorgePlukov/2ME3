@@ -63,7 +63,7 @@ public class GameBoard
 	
 	public void update()
 	{
-		System.out.println(checkValid());
+		
 	}
 	
 	//Render The Game Board With Tiles
@@ -102,6 +102,13 @@ public class GameBoard
 					chips[i][j].render();
 			}
 		}
+		
+		if(checkValid())
+		{
+			sheet.draw(256, 0, 0, 2, true);
+		}
+		else 
+			sheet.draw(256, 0, 0, 3, true);
 	}
 	
 	
@@ -143,7 +150,7 @@ public class GameBoard
 		}
 		if(blueCount == (redCount - 1) || redCount == (blueCount - 1))
 			return true;
-		if((blueCount == 1 && redCount == 0) || (redCount == 1 && blueCount == 0) || (redCount == 0 && blueCount == 0))
+		if((blueCount == 1 && redCount == 0) || (redCount == 1 && blueCount == 0) || (redCount == 0 && blueCount == 0) || (redCount == blueCount))
 			return true;
 		return false;
 	}

@@ -7,6 +7,7 @@ import static org.lwjgl.opengl.GL11.glLoadIdentity;
 import static org.lwjgl.opengl.GL11.glPopMatrix;
 import static org.lwjgl.opengl.GL11.glPushMatrix;
 
+import java.awt.Font;
 import java.io.IOException;
 
 import org.lwjgl.LWJGLException;
@@ -15,6 +16,8 @@ import org.lwjgl.input.Mouse;
 import org.lwjgl.opengl.Display;
 import org.lwjgl.opengl.DisplayMode;
 import org.lwjgl.opengl.GL11;
+import org.newdawn.slick.Color;
+import org.newdawn.slick.TrueTypeFont;
 
 public class Main 
 {
@@ -57,16 +60,18 @@ public class Main
 	       
 	       GL11.glClearColor(0.0f, 0.0f, 0.0f, 0.0f);         
 	         
-	            // Enable Alpha Blending
-	            GL11.glEnable(GL11.GL_BLEND);
-	            GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
+	       GL11.glClearDepth(1);
+	       // Enable Alpha Blending
+	       GL11.glEnable(GL11.GL_BLEND);
+	       GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
 	         
-	            GL11.glViewport(0,0,WIDTH, HEIGHT);
-	        GL11.glMatrixMode(GL11.GL_PROJECTION);
-	        GL11.glLoadIdentity();
-	        GL11.glOrtho(0, WIDTH,  0, HEIGHT, 1, -1);
-	        GL11.glMatrixMode(GL11.GL_MODELVIEW);
-	        GL11.glDisable(GL_DEPTH_TEST);
+	       GL11.glViewport(0,0,WIDTH, HEIGHT);
+	       GL11.glMatrixMode(GL11.GL_PROJECTION);
+	       GL11.glLoadIdentity();
+	       GL11.glOrtho(0, WIDTH,  0, HEIGHT, 1, -1);
+	       GL11.glMatrixMode(GL11.GL_MODELVIEW);
+	       GL11.glDisable(GL_DEPTH_TEST);
+	       GL11.glDisable(GL11.GL_LIGHTING);
 		
 
 	}
