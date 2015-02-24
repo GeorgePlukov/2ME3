@@ -8,10 +8,9 @@ public class GameBoard
 {
 	
 	//Declare Variables & Objects
-	char selected;
-	boolean valid; 
-	SpriteSheet sheet;
-	Chip [][] chips;
+	char selected;		//Currently Selected Tile Color for Board
+	SpriteSheet sheet;	//Sprite Sheet with GameBoard and Chip Tiles
+	Chip [][] chips;	//Array to Hold Chips in GameBoard
 
 	
 	public GameBoard()
@@ -25,12 +24,23 @@ public class GameBoard
 			e.printStackTrace();
 		}
 		
-		chips = new Chip [8][8];
+		//Initialize 7x6 GameBoard
+		chips = new Chip [7][6];
+		
+		
+		//Start GameBoard with Random Chip Selected. 
+		
+		if(Math.random() > 0.5)
+			selected = 'b';
+		else
+			selected = 'r';
 	}
 	
 	public void getInput()
 	{
+		
 		//Highlight Selected
+		
 		if(Mouse.getX() > 0 && Mouse.getY() > 0 && Mouse.getX() < 64 && Mouse.getY() < 64 && Mouse.isButtonDown(0))
 		{
 			selected = 'b';
@@ -40,10 +50,12 @@ public class GameBoard
 			selected = 'r';
 		}
 		
+		
 		//Get Mouse Input for Game Board Tiles
-		for (int i = 64; i < 512; i+=64)
+		
+		for (int i = 64; i < chips.length*64 + 64; i+=64)
 		{
-			for(int j = 64; j < 512; j+=64)
+			for(int j = 64; j < chips[0].length*64 + 64; j+=64)
 			{
 				if(Mouse.getX() > i && Mouse.getY() > j && Mouse.getX() < i + 64 && Mouse.getY() < j + 64 && Mouse.isButtonDown(0))
 				{
@@ -69,46 +81,49 @@ public class GameBoard
 	//Render The Game Board With Tiles
 	public void render()
 	{
-		//Draws Board
-		for(int i =  1; i < 8; i++)
-		{
-			for(int j = 1; j < 8; j++)
-			{
-				sheet.draw(i*64, j*64, 2, 0, true);
-				sheet.draw(i*64, j*64, 2, 1, true);
-			}
-		}
+		
 		
 		//Draws Chip Options
-		sheet.draw(0, 0, 0, 0, true);
-		sheet.draw(64*8, 0, 1, 0, true);
+		sheet.draw(0, 0, 0, 0);
+		sheet.draw(64*8, 0, 1, 0);
 		
-		//Draw Outline for Selected Chip
+		//Draw Outline for Selected Chip (Green)
 		if(selected == 'b')
 		{
-			sheet.draw(0, 0, 0, 1, true);
+			sheet.draw(0, 0, 0, 1);
 		}
 		if(selected == 'r')
 		{
-			sheet.draw(64*8, 0, 0, 1, true);
+			sheet.draw(64*8, 0, 0, 1);
 		}
 		
 		//Draw Chips in Chip Matrix
 		for(int i = 0; i < chips.length; i++)
 		{
-			for(int j = 0; j < chips.length; j++)
+			for(int j = 0; j < chips[0].length; j++)
 			{
 				if(chips[i][j] != null)
 					chips[i][j].render();
 			}
 		}
 		
+		//Draws Validity to Screen
 		if(checkValid())
 		{
-			sheet.draw(256, 0, 0, 2, true);
+			sheet.draw(256, 0, 0, 2);
 		}
 		else 
-			sheet.draw(256, 0, 0, 3, true);
+			sheet.draw(256, 0, 0, 3);
+		
+		//Draws Board
+		for(int i =  1; i <= chips.length; i++)
+		{
+			for(int j = 1; j <= chips[0].length; j++)
+			{
+				sheet.draw(i*64, j*64, 2, 0);
+				sheet.draw(i*64, j*64, 2, 1);
+			}
+		}
 	}
 	
 	
@@ -119,7 +134,7 @@ public class GameBoard
 	
 	private boolean checkGravity()
 	{
-		for(int y = chips.length-1; y > 1; y--)
+		for(int y = chips[0].length-1; y > 0; y--)
 		{
 			for(int x = 0; x < chips.length; x++)
 			{
@@ -137,7 +152,7 @@ public class GameBoard
 		int blueCount = 0, redCount = 0;
 		for(int i = 0; i < chips.length; i++)
 		{
-			for(int j = 0; j < chips.length; j++)
+			for(int j = 0; j < chips[0].length; j++)
 			{
 				if(chips[i][j] != null)
 				{

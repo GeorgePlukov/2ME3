@@ -11,7 +11,8 @@ import org.newdawn.slick.util.ResourceLoader;
 import org.lwjgl.opengl.GL11;
 
 /**
- * Description: 
+ * Description: SpriteSheet uses an address to a PNG image and splits the images
+ *  contained into tiles based on an x,y grid assuming the top left of the image is 0,0.
  * 
  * @Author Theo R. Stone ©
  */
@@ -20,7 +21,7 @@ public class SpriteSheet
 {
 	//Declare Variables
 	private Texture texture;
-	float imgX, imgY;
+	float imgX, imgY;		//Dimensions of Each Tile
 	
 	
 	public SpriteSheet(String address, float imgX, float imgY) throws IOException
@@ -32,16 +33,11 @@ public class SpriteSheet
 	}
 
 	
-	public void draw(float x, float y, float gridX, float gridY, boolean pop)
+	public void draw(float x, float y, float gridX, float gridY)
 	{
-		if(pop)
-		{
-			GL11.glPushMatrix();
+			GL11.glPushMatrix();	//Pushes New Matrix to Draw On
 			GL11.glTranslatef(x, y, 0);
-	        //Color.white.bind();
 	        	texture.bind();
-	         
-	        	
 		        GL11.glBegin(GL11.GL_QUADS);
 		            GL11.glTexCoord2f((float)(gridX)*(imgX/texture.getTextureWidth()), (float)(gridY)*(imgY/texture.getTextureHeight()));
 		            	GL11.glVertex2f(0, 0);
@@ -52,26 +48,7 @@ public class SpriteSheet
 		            GL11.glTexCoord2f((float)(gridX)*(imgX/texture.getTextureWidth()), (float)(gridY + 1)*(imgY/texture.getTextureHeight()));
 		            	GL11.glVertex2f(0, this.imgY);
 		        GL11.glEnd();
-	    	GL11.glPopMatrix();
-		}
-		else
-		{
-			GL11.glTranslatef(x, y, 0);
-	        //Color.white.bind();
-	        	texture.bind();
-	         
-	        	
-		        GL11.glBegin(GL11.GL_QUADS);
-		            GL11.glTexCoord2f((float)(gridX)*(imgX/texture.getTextureWidth()), (float)(gridY)*(imgY/texture.getTextureHeight()));
-		            	GL11.glVertex2f(0, 0);
-		            GL11.glTexCoord2f((float)(gridX + 1)*(imgX/texture.getTextureWidth()), (float)(gridY)*(imgY/texture.getTextureHeight()));
-		            	GL11.glVertex2f(this.imgX, 0);
-		            GL11.glTexCoord2f((float)(gridX + 1)*(imgX/texture.getTextureWidth()), (float)(gridY + 1)*(imgY/texture.getTextureHeight()));
-		            	GL11.glVertex2f(this.imgX, this.imgY);
-		            GL11.glTexCoord2f((float)(gridX)*(imgX/texture.getTextureWidth()), (float)(gridY + 1)*(imgY/texture.getTextureHeight()));
-		            	GL11.glVertex2f(0, this.imgY);
-		        GL11.glEnd();
-		}
+	    	GL11.glPopMatrix();		//Pops Drawn Matrix
 		
 	}
 	

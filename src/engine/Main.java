@@ -46,7 +46,6 @@ public class Main
 		{
 			Display.setDisplayMode(new DisplayMode(WIDTH, HEIGHT));
 			Display.create();
-			Keyboard.create();
 			Mouse.create();
 			Display.setVSyncEnabled(true);
 		}
@@ -56,22 +55,23 @@ public class Main
 	//*Setup OpenGL*//
 	private static void initGL()
 	{
+		//Enables 2D Textures
 	       GL11.glEnable(GL11.GL_TEXTURE_2D);              
 	       
 	       GL11.glClearColor(0.0f, 0.0f, 0.0f, 0.0f);         
 	         
 	       GL11.glClearDepth(1);
+	       
 	       // Enable Alpha Blending
 	       GL11.glEnable(GL11.GL_BLEND);
 	       GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
-	         
-	       GL11.glViewport(0,0,WIDTH, HEIGHT);
+	       
+	       //Sets Up Projection Matrix
 	       GL11.glMatrixMode(GL11.GL_PROJECTION);
-	       GL11.glLoadIdentity();
-	       GL11.glOrtho(0, WIDTH,  0, HEIGHT, 1, -1);
+	       GL11.glOrtho(0, WIDTH,  0, HEIGHT, 1, -1);	//Sets Up Matrix (Top Left is [0,0])
+	       
+	       //Sets Up ModelView Matrix
 	       GL11.glMatrixMode(GL11.GL_MODELVIEW);
-	       GL11.glDisable(GL_DEPTH_TEST);
-	       GL11.glDisable(GL11.GL_LIGHTING);
 		
 
 	}
@@ -79,7 +79,7 @@ public class Main
 	//*Initialize Game*//
 	private static void initGame() throws IOException
 	{
-		// create the game board object
+		//Create the game board object.
 		game = new GameBoard();
 	}
 	
@@ -110,7 +110,6 @@ public class Main
 	//*Render Game State*//
 	private static void render()
 	{
-		glPushMatrix();
 		glClear(GL_COLOR_BUFFER_BIT);	//Remove What's On Screen
 		glLoadIdentity();				//Reset Matrix for Frame
 		
@@ -118,14 +117,12 @@ public class Main
 		
 		Display.update();				//Double Buffering
 		Display.sync(60);				//Sets Frame Rate to 60
-		glPopMatrix();
 	}
 
 	//*Clean Up*//
 	public static void cleanUp()
 	{
 		Display.destroy();
-		Keyboard.destroy();
 		Mouse.destroy();
 	}	
 }
