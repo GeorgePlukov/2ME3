@@ -89,17 +89,11 @@ public class Main
 		// Main Game loop, runs until a close is requested
 		while(!Display.isCloseRequested())
 		{
-			getInput();
 			update();
 			render();
 		}
 	}
 	
-	//*Get User Input*//
-	private static void getInput()
-	{
-		game.getInput();
-	}
 	
 	//*Update Game State*//
 	private static void update()

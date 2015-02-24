@@ -3,14 +3,15 @@ package engine;
 import java.io.IOException;
 
 import org.lwjgl.input.Mouse;
+import org.newdawn.slick.geom.Point;
 
 public class GameBoard 
 {
 	
 	//Declare Variables & Objects
-	char selected;		//Currently Selected Tile Color for Board
-	SpriteSheet sheet;	//Sprite Sheet with GameBoard and Chip Tiles
-	Chip [][] chips;	//Array to Hold Chips in GameBoard
+	private boolean isRedActive = false;
+	private SpriteSheet sheet;	//Sprite Sheet with GameBoard and Chip Tiles
+	private Chip [][] chips;	//Array to Hold Chips in GameBoard
 
 	
 	public GameBoard()
@@ -21,6 +22,7 @@ public class GameBoard
 		} 
 		catch (IOException e) 
 		{
+			System.out.println("Sprite Sheet failure");
 			e.printStackTrace();
 		}
 		
@@ -31,68 +33,46 @@ public class GameBoard
 		//Start GameBoard with Random Chip Selected. 
 		
 		if(Math.random() > 0.5)
-			selected = 'b';
-		else
-			selected = 'r';
+			isRedActive = true;
+
 	}
 	
-	public void getInput()
-	{
-		
-		//Highlight Selected
-		
-		if(Mouse.getX() > 0 && Mouse.getY() > 0 && Mouse.getX() < 64 && Mouse.getY() < 64 && Mouse.isButtonDown(0))
-		{
-			selected = 'b';
-		}
-		else if(Mouse.getX() > 64*8 && Mouse.getY() > 0 && Mouse.getX() < 64*8+64 && Mouse.getY() < 64 && Mouse.isButtonDown(0))
-		{
-			selected = 'r';
-		}
-		
-	}
-	
+
 	public void update()
 	{
-		//Get Mouse Input for Game Board Tiles
+		// Check to see whether or not we are swiching colors.
+		isRedActive = MouseInput.isRedActive(isRedActive);
 		
-				for (int i = 64; i < chips.length*64 + 64; i+=64)
-				{
-					for(int j = 64; j < chips[0].length*64 + 64; j+=64)
-					{
-						if(Mouse.getX() > i && Mouse.getY() > j && Mouse.getX() < i + 64 && Mouse.getY() < j + 64 && Mouse.isButtonDown(0))
-						{
-							if(selected == 'b')
-							{
-								chips[(i/64)-1][(j/64)-1] = new Chip(i, j, 64, 64, 'b', sheet);
-							}
-							else if(selected == 'r')
-							{
-								chips[(i/64)-1][(j/64)-1] = new Chip(i, j, 64, 64, 'r', sheet);
-							}
-						}
-					}
+		// Get the current mouse position.
+		Point mousePos = MouseInput.getMousePosition();
+	
+		//Get Mouse Input for Game Board Tiles
+		for (int i = 64; i < chips.length*64 + 64; i+=64){
+			for(int j = 64; j < chips[0].length*64 + 64; j+=64){
+				if(mousePos.getX() > i && mousePos.getY() > j && mousePos.getX() < i + 64 && mousePos.getY() < j + 64 && MouseInput.isButtonDown(0)){
+					if(isRedActive)
+						chips[(i/64)-1][(j/64)-1] = new Chip(i, j, 64, 64, 'b', sheet);
+					else 
+						chips[(i/64)-1][(j/64)-1] = new Chip(i, j, 64, 64, 'r', sheet);
 				}
+			}
+		}
 	}
 	
 	//Render The Game Board With Tiles
 	public void render()
 	{
 		
-		
 		//Draws Chip Options
 		sheet.draw(0, 0, 0, 0);
 		sheet.draw(64*8, 0, 1, 0);
 		
 		//Draw Outline for Selected Chip (Green)
-		if(selected == 'b')
-		{
+		if(isRedActive)
 			sheet.draw(0, 0, 0, 1);
-		}
-		if(selected == 'r')
-		{
+		else
 			sheet.draw(64*8, 0, 0, 1);
-		}
+		
 		
 		//Draw Chips in Chip Matrix
 		for(int i = 0; i < chips.length; i++)
@@ -105,7 +85,7 @@ public class GameBoard
 		}
 		
 		//Draws Validity to Screen
-		if(checkValid())
+		if(checkValidity())
 		{
 			sheet.draw(256, 0, 0, 2);
 		}
@@ -124,46 +104,11 @@ public class GameBoard
 	}
 	
 	
-	public boolean checkValid()
-	{
-		return checkGravity() && checkChipNums();
+	public boolean checkValidity(){
+		return Logic.checkGravity(chips) && Logic.checkChipNums(chips);
 	}
 	
-	private boolean checkGravity()
-	{
-		for(int y = chips[0].length-1; y > 0; y--)
-		{
-			for(int x = 0; x < chips.length; x++)
-			{
-				if(chips[x][y] != null && chips[x][y-1] == null)
-					return false;
-				
-			}
-		}
-		
-		return true;
-	}
+
 	
-	private boolean checkChipNums()
-	{
-		int blueCount = 0, redCount = 0;
-		for(int i = 0; i < chips.length; i++)
-		{
-			for(int j = 0; j < chips[0].length; j++)
-			{
-				if(chips[i][j] != null)
-				{
-					if(chips[i][j].getColor() == 'b')
-						blueCount++;
-					else if(chips[i][j].getColor() == 'r')
-						redCount++;
-				}
-			}
-		}
-		if(blueCount == (redCount - 1) || redCount == (blueCount - 1))
-			return true;
-		if((blueCount == 1 && redCount == 0) || (redCount == 1 && blueCount == 0) || (redCount == 0 && blueCount == 0) || (redCount == blueCount))
-			return true;
-		return false;
-	}
+
 }
