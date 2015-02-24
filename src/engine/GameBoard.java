@@ -50,32 +50,29 @@ public class GameBoard
 			selected = 'r';
 		}
 		
-		
-		//Get Mouse Input for Game Board Tiles
-		
-		for (int i = 64; i < chips.length*64 + 64; i+=64)
-		{
-			for(int j = 64; j < chips[0].length*64 + 64; j+=64)
-			{
-				if(Mouse.getX() > i && Mouse.getY() > j && Mouse.getX() < i + 64 && Mouse.getY() < j + 64 && Mouse.isButtonDown(0))
-				{
-					if(selected == 'b')
-					{
-						chips[(i/64)-1][(j/64)-1] = new Chip(i, j, 64, 64, 'b', sheet);
-					}
-					else if(selected == 'r')
-					{
-						chips[(i/64)-1][(j/64)-1] = new Chip(i, j, 64, 64, 'r', sheet);
-					}
-				}
-			}
-		}
-		
 	}
 	
 	public void update()
 	{
+		//Get Mouse Input for Game Board Tiles
 		
+				for (int i = 64; i < chips.length*64 + 64; i+=64)
+				{
+					for(int j = 64; j < chips[0].length*64 + 64; j+=64)
+					{
+						if(Mouse.getX() > i && Mouse.getY() > j && Mouse.getX() < i + 64 && Mouse.getY() < j + 64 && Mouse.isButtonDown(0))
+						{
+							if(selected == 'b')
+							{
+								chips[(i/64)-1][(j/64)-1] = new Chip(i, j, 64, 64, 'b', sheet);
+							}
+							else if(selected == 'r')
+							{
+								chips[(i/64)-1][(j/64)-1] = new Chip(i, j, 64, 64, 'r', sheet);
+							}
+						}
+					}
+				}
 	}
 	
 	//Render The Game Board With Tiles
