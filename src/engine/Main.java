@@ -79,15 +79,16 @@ public class Main
 	//*Initialize Game*//
 	private static void initGame() throws IOException
 	{
+		// create the game board object
 		game = new GameBoard();
 	}
 	
 	//*Start Game Loop*//
 	private static void gameLoop()
 	{
+		// Main Game loop, runs until a close is requested
 		while(!Display.isCloseRequested())
 		{
- 
 			getInput();
 			update();
 			render();

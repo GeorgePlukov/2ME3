@@ -3,7 +3,7 @@ package engine;
 public class Chip 
 {
 	//Declare Variables & Objects
-	private int x, y, sx, sy;
+	private int x, y;
 	private char color;
 	private SpriteSheet s;
 	
@@ -11,8 +11,6 @@ public class Chip
 	{
 		this.x = x;
 		this.y = y;
-		this.sx = sx; 
-		this.sy = sy;
 		this.color = color;
 		this.s = s;
 	}
