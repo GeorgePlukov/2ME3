@@ -1,23 +1,16 @@
  package engine;
 
 import static org.lwjgl.opengl.GL11.GL_COLOR_BUFFER_BIT;
-import static org.lwjgl.opengl.GL11.GL_DEPTH_TEST;
 import static org.lwjgl.opengl.GL11.glClear;
 import static org.lwjgl.opengl.GL11.glLoadIdentity;
-import static org.lwjgl.opengl.GL11.glPopMatrix;
-import static org.lwjgl.opengl.GL11.glPushMatrix;
 
-import java.awt.Font;
 import java.io.IOException;
 
 import org.lwjgl.LWJGLException;
-import org.lwjgl.input.Keyboard;
 import org.lwjgl.input.Mouse;
 import org.lwjgl.opengl.Display;
 import org.lwjgl.opengl.DisplayMode;
 import org.lwjgl.opengl.GL11;
-import org.newdawn.slick.Color;
-import org.newdawn.slick.TrueTypeFont;
 
 public class Main 
 {
@@ -107,7 +100,7 @@ public class Main
 		glClear(GL_COLOR_BUFFER_BIT);	//Remove What's On Screen
 		glLoadIdentity();				//Reset Matrix for Frame
 		
-		game.render();
+		View.render(game);
 		
 		Display.update();				//Double Buffering
 		Display.sync(60);				//Sets Frame Rate to 60

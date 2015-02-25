@@ -14,7 +14,7 @@ import org.lwjgl.opengl.GL11;
  * Description: SpriteSheet uses an address to a PNG image and splits the images
  *  contained into tiles based on an x,y grid assuming the top left of the image is 0,0.
  * 
- * @Author Theo R. Stone ©
+ * @Author Theo R. Stone ï¿½
  */
 
 public class SpriteSheet 
@@ -24,11 +24,18 @@ public class SpriteSheet
 	float imgX, imgY;		//Dimensions of Each Tile
 	
 	
-	public SpriteSheet(String address, float imgX, float imgY) throws IOException
+	public SpriteSheet(String address, float imgX, float imgY)
 	{
 		this.imgX = imgX; 
 		this.imgY = imgY;
-		texture = TextureLoader.getTexture("PNG", ResourceLoader.getResourceAsStream(address));
+		
+		try {
+			texture = TextureLoader.getTexture("PNG", ResourceLoader.getResourceAsStream(address));
+		} catch (IOException e) {
+			System.out.println("Sprite sheet wont load");
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 	}
 

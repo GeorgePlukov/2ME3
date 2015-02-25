@@ -25,10 +25,14 @@ abstract class Logic {
 			{
 				if(chips[i][j] != null)
 				{
-					if(chips[i][j].getColor() == 'b')
+					switch(chips[i][j].getColor()){
+					case BLUE:
 						blueCount++;
-					else if(chips[i][j].getColor() == 'r')
+						break;
+					case RED:
 						redCount++;
+						break;
+					}
 				}
 			}
 		}
@@ -38,5 +42,8 @@ abstract class Logic {
 			return true;
 		return false;
 	}
-
+	
+	public static boolean checkValidity(Chip [][] chips){
+		return Logic.checkGravity(chips) && Logic.checkChipNums(chips);
+	}
 }
