@@ -34,11 +34,22 @@ public class GameBoard
 		//Get Mouse Input for Game Board Tiles
 		for (int i = 64; i < chips.length*64 + 64; i+=64)
 			for(int j = 64; j < chips[0].length*64 + 64; j+=64)
-				if(mousePos.getX() > i && mousePos.getY() > j && mousePos.getX() < i + 64 && mousePos.getY() < j + 64 && MouseInput.isButtonDown(0))
+				if(mousePos.getX() > i && mousePos.getY() > j && mousePos.getX() < i + 64 && mousePos.getY() < j + 64 && MouseInput.isButtonDown(0) && chips[(i/64)-1][(j/64)-1] == null)
+				{
 					if(isRedActive)
+					{
 						chips[(i/64)-1][(j/64)-1] = new Chip(i, j, 64, 64, ChipColor.RED);
+					}
 					else 
+					{
 						chips[(i/64)-1][(j/64)-1] = new Chip(i, j, 64, 64, ChipColor.BLUE);
+					}
+					
+					if(!Logic.checkValidity(chips))
+					{
+						chips[(i/64)-1][(j/64)-1] = null;
+					}
+				}
 		
 	}
 
