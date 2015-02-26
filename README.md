@@ -20,18 +20,23 @@ Collaborators:
 
 Main Class Imports:
 
-org.lwjgl.opengl.GL11.GL_COLOR_BUFFER_BIT;
-org.lwjgl.opengl.GL11.glClear;
-org.lwjgl.opengl.GL11.glLoadIdentity;
-java.io.IOException;
-org.lwjgl.LWJGLException;
-org.lwjgl.input.Mouse;
-org.lwjgl.opengl.Display;
-org.lwjgl.opengl.DisplayMode;
-org.lwjgl.opengl.GL11;
+org.lwjgl.opengl.GL11.GL_COLOR_BUFFER_BIT
+org.lwjgl.opengl.GL11.glClear
+org.lwjgl.opengl.GL11.glLoadIdentity
+java.io.IOException
+org.lwjgl.LWJGLException
+org.lwjgl.input.Mouse
+org.lwjgl.opengl.Display
+org.lwjgl.opengl.DisplayMode
+org.lwjgl.opengl.GL11
 
 Main Class Types: Int, Gameboard
 
+Chip Class Inports: NONE
+Chip Class Types: Int, ChipColor
+
+Gameboard Class Imports: org.newdawn.slick.geom.Point
+Gameboard Class Types: boolean, Chip
 
 
 
