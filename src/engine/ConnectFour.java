@@ -12,13 +12,13 @@ import org.lwjgl.opengl.Display;
 import org.lwjgl.opengl.DisplayMode;
 import org.lwjgl.opengl.GL11;
 
-public class Main 
+public class ConnectFour 
 {
 	
 	//Declare Variables & Objects
 	private static final int WIDTH = 576;
 	private static final int HEIGHT = 576;
-	private static final String gameName = "Connect 4";
+	private static final String GAME_NAME = "CONNECT FOUR";
 	private static GameBoard game;
 	
 	
@@ -41,7 +41,7 @@ public class Main
 			Display.setDisplayMode(new DisplayMode(WIDTH, HEIGHT));
 			Display.create();
 			Mouse.create();
-			Display.setTitle(gameName);
+			Display.setTitle(GAME_NAME);
 			Display.setVSyncEnabled(true);
 		}
 		catch (LWJGLException e) { e.printStackTrace(); }

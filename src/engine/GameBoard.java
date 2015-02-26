@@ -6,7 +6,7 @@ public class GameBoard
 {
 	
 	//Declare Variables & Objects
-	private boolean isRedActive = false;
+	private boolean isRed = false;
 	
 	private Chip [][] chips;	//Array to Hold Chips in GameBoard
 	private boolean [][] errors;	//Array Holding Error Pointers in Grid
@@ -20,14 +20,14 @@ public class GameBoard
 		
 		//Start GameBoard with Random Chip Selected. 
 		if(Math.random() > 0.5)
-			isRedActive = true;
+			isRed = true;
 	}
 	
 
 	public void update()
 	{
 		// Check to see whether or not we are switching colors.
-		isRedActive = MouseInput.isRedActive(isRedActive);
+		isRed = MouseInput.isRedActive(isRed);
 		
 		// Get the current mouse position.
 		Point mousePos = MouseInput.getMousePosition();
@@ -37,13 +37,13 @@ public class GameBoard
 			for(int j = 64; j < chips[0].length*64 + 64; j+=64)
 				if(mousePos.getX() > i && mousePos.getY() > j && mousePos.getX() < i + 64 && mousePos.getY() < j + 64 && MouseInput.isButtonDown(0) && chips[(i/64)-1][(j/64)-1] == null)
 				{
-					if(isRedActive)
+					if(isRed)
 					{
-						chips[(i/64)-1][(j/64)-1] = new Chip(i, j, 64, 64, ChipColor.RED);
+						chips[(i/64)-1][(j/64)-1] = new Chip(i, j, 64, 64, ChipColor.Color.BLUE);
 					}
 					else 
 					{
-						chips[(i/64)-1][(j/64)-1] = new Chip(i, j, 64, 64, ChipColor.BLUE);
+						chips[(i/64)-1][(j/64)-1] = new Chip(i, j, 64, 64, ChipColor.Color.BLUE);
 					}
 					
 //					if(!Logic.checkValidity(chips))
@@ -56,7 +56,7 @@ public class GameBoard
 
 
 	public boolean isRedActive() {
-		return isRedActive;
+		return isRed;
 	}
 
 	public Chip[][] getChips() {
