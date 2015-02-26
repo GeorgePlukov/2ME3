@@ -18,6 +18,7 @@ public class Main
 	//Declare Variables & Objects
 	private static final int WIDTH = 576;
 	private static final int HEIGHT = 576;
+	private static final String gameName = "Connect 4";
 	private static GameBoard game;
 	
 	
@@ -40,6 +41,7 @@ public class Main
 			Display.setDisplayMode(new DisplayMode(WIDTH, HEIGHT));
 			Display.create();
 			Mouse.create();
+			Display.setTitle(gameName);
 			Display.setVSyncEnabled(true);
 		}
 		catch (LWJGLException e) { e.printStackTrace(); }
@@ -107,7 +109,7 @@ public class Main
 	}
 
 	//*Clean Up*//
-	public static void cleanUp()
+	private static void cleanUp()
 	{
 		Display.destroy();
 		Mouse.destroy();

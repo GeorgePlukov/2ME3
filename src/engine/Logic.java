@@ -2,21 +2,34 @@ package engine;
 
 abstract class Logic {
 	
-	// Make sure that all the chips have one supporting them
-	public static boolean checkGravity(Chip[][] chips){
+	public static boolean checkValidity(Chip [][] chips, boolean [][] errors){
+		return Logic.checkGravity(chips, errors) && Logic.checkChipNums(chips);
+	}
+	
+	// Make sure that all the chips have one supporting them and added errors to the boolean array for any empty space below the tile. 
+	private static boolean checkGravity(Chip[][] chips, boolean [][] errors){
+		boolean gravity = true;
+		resetErrors(errors);
 		for(int y = chips[0].length-1; y > 0; y--)
 		{
 			for(int x = 0; x < chips.length; x++)
 			{
 				if(chips[x][y] != null && chips[x][y-1] == null)
-					return false;
+				{
+					gravity = false;
+					
+					for(int i = y-1; i >= 0 && chips[x][i] == null; i--)
+					{
+						errors[x][i] = true;
+					}
+				}
 				
 			}
 		}
 		
-		return true;
+		return gravity;
 	}
-	public static boolean checkChipNums(Chip[][] chips)
+	private static boolean checkChipNums(Chip[][] chips)
 	{
 		int blueCount = 0, redCount = 0;
 		for(int i = 0; i < chips.length; i++)
@@ -43,7 +56,11 @@ abstract class Logic {
 		return false;
 	}
 	
-	public static boolean checkValidity(Chip [][] chips){
-		return Logic.checkGravity(chips) && Logic.checkChipNums(chips);
+	private static void resetErrors(boolean [][] errors)
+	{
+		for(int i = 0; i < errors.length; i++)
+			for(int j = 0; j < errors[0].length; j++)
+				errors[i][j] = false;
 	}
+	
 }

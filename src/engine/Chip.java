@@ -8,7 +8,7 @@ public class Chip
 {
 	//Declare Variables & Objects
 	private int x, y;		//X & Y Coordinates
-	private ChipColor color;		//Character 'b' or 'r' for Blue or Red Chip. 
+	private ChipColor color;
 	
 	public Chip(int x, int y, int sx, int sy, ChipColor color)
 	{

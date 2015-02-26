@@ -9,23 +9,24 @@ public class GameBoard
 	private boolean isRedActive = false;
 	
 	private Chip [][] chips;	//Array to Hold Chips in GameBoard
+	private boolean [][] errors;	//Array Holding Error Pointers in Grid
 
 	
 	public GameBoard()
 	{
 		//Initialize 7x6 GameBoard
 		chips = new Chip [7][6];
+		errors = new boolean [7][6];
 		
 		//Start GameBoard with Random Chip Selected. 
 		if(Math.random() > 0.5)
 			isRedActive = true;
-
 	}
 	
 
 	public void update()
 	{
-		// Check to see whether or not we are swiching colors.
+		// Check to see whether or not we are switching colors.
 		isRedActive = MouseInput.isRedActive(isRedActive);
 		
 		// Get the current mouse position.
@@ -45,10 +46,10 @@ public class GameBoard
 						chips[(i/64)-1][(j/64)-1] = new Chip(i, j, 64, 64, ChipColor.BLUE);
 					}
 					
-					if(!Logic.checkValidity(chips))
-					{
-						chips[(i/64)-1][(j/64)-1] = null;
-					}
+//					if(!Logic.checkValidity(chips))
+//					{
+//						chips[(i/64)-1][(j/64)-1] = null;
+//					}
 				}
 		
 	}
@@ -60,5 +61,10 @@ public class GameBoard
 
 	public Chip[][] getChips() {
 		return chips;
+	}
+	
+	public boolean [][] getErrors()
+	{
+		return errors;
 	}
 }
