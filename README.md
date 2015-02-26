@@ -32,7 +32,7 @@ org.lwjgl.opengl.GL11
 
 Main Class Types: Int, Gameboard
 
-Chip Class Inports: NONE
+Chip Class Imports: NONE
 Chip Class Types: Int, ChipColor
 
 Gameboard Class Imports: org.newdawn.slick.geom.Point
@@ -43,3 +43,24 @@ Logic Class Types: NONE
 
 View Class Imports: NONE
 View Class Types: SpriteSheet
+
+MouseInput Class Imports: 
+
+org.lwjgl.input.Mouse
+org.newdawn.slick.geom.Point
+
+MouseInput Types: NONE
+
+
+SpriteSheet Class Imports:
+
+java.io.IOException
+org.newdawn.slick.opengl.Texture
+org.newdawn.slick.opengl.TextureLoader
+org.newdawn.slick.util.ResourceLoader
+
+SpriteSheet Class Types: Texture, float
+
+
+
+
