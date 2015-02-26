@@ -10,11 +10,11 @@ public class Chip
 	private int x, y;		//X & Y Coordinates
 	private Color color;
 	
-	public Chip(int x, int y, int sx, int sy, Color blue)
+	public Chip(int x, int y, int sx, int sy, Color c)
 	{
 		this.x = x;
 		this.y = y;
-		this.color = blue;
+		this.color = c;
 	}
 
 	

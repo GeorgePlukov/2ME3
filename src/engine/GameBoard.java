@@ -39,17 +39,12 @@ public class GameBoard
 				{
 					if(isRed)
 					{
-						chips[(i/64)-1][(j/64)-1] = new Chip(i, j, 64, 64, ChipColor.Color.BLUE);
+						chips[(i/64)-1][(j/64)-1] = new Chip(i, j, 64, 64, ChipColor.Color.RED);
 					}
 					else 
 					{
 						chips[(i/64)-1][(j/64)-1] = new Chip(i, j, 64, 64, ChipColor.Color.BLUE);
 					}
-					
-//					if(!Logic.checkValidity(chips))
-//					{
-//						chips[(i/64)-1][(j/64)-1] = null;
-//					}
 				}
 		
 	}
