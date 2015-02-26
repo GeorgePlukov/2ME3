@@ -38,5 +38,8 @@ Chip Class Types: Int, ChipColor
 Gameboard Class Imports: org.newdawn.slick.geom.Point
 Gameboard Class Types: boolean, Chip
 
+Logic Class Imports: NONE
+Logic Class Types: NONE
 
-
+View Class Imports: NONE
+View Class Types: SpriteSheet
