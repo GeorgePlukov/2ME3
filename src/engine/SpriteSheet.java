@@ -21,7 +21,7 @@ public class SpriteSheet
 {
 	//Declare Variables
 	private Texture texture;
-	float imgX, imgY;		//Dimensions of Each Tile
+	private float imgX, imgY;		//Dimensions of Each Tile
 	
 	
 	public SpriteSheet(String address, float imgX, float imgY)
