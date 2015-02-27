@@ -3,7 +3,7 @@ package engine;
 abstract class Logic {
 	
 	public static boolean checkValidity(Chip [][] chips, boolean [][] errors){
-		return Logic.checkGravity(chips, errors) && Logic.checkChipNums(chips);
+		return checkGravity(chips, errors) && checkChipNums(chips);
 	}
 	
 	// Make sure that all the chips have one supporting them and added errors to the boolean array for any empty space below the tile. 
