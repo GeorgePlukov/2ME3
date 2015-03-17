@@ -1,5 +1,7 @@
 package engine;
 
+import engine.ChipColor.Color;
+
 public class View {
 	private static SpriteSheet sheet = new SpriteSheet("res/Chips.png", 64, 64);	//Sprite Sheet with GameBoard and Chip Tiles
 
@@ -31,15 +33,16 @@ public class View {
 			}
 		}
 		
-		//Draws Validity to Screen
-		if(Logic.checkValidity(game.getChips(), game.getErrors()))
-		{
-			sheet.draw(256, 0, 0, 2);
-		}
-		else 
-			sheet.draw(256, 0, 0, 3);
 		
-		//Draws Errors
+		//Draw Win
+		
+		if(Logic.checkWin(game.getChips()) == Color.BLUE)
+			sheet.draw(256, 0, 0, 2);
+		else if(Logic.checkWin(game.getChips()) == Color.RED)
+			sheet.draw(256, 0, 0, 3);
+		else if(Logic.isTie(chips))
+			sheet.draw(256, 0, 1, 3);
+			
 		
 		
 		//Draws Board

@@ -52,12 +52,12 @@ public class GameBoard
 		
 		if(Logic.checkWin(chips) == Color.RED)
 		{
-			System.out.println("RED WIN");
+			//TODO: STOP GAME
 		}
 		
 		if(Logic.checkWin(chips) == Color.BLUE)
 		{
-			System.out.println("BLUE WIN");
+			//TODO: STOP GAME
 		}
 		
 	}
