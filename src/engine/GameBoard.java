@@ -38,13 +38,13 @@ public class GameBoard
 			{
 				if(isRed)
 				{
-					if(Logic.addChip(chips, x, ChipColor.Color.RED))
+					if(addChip(chips, x, ChipColor.Color.RED))
 						isRed = false;
 					
 				}
 				else
 				{
-					if(Logic.addChip(chips, x, ChipColor.Color.BLUE))
+					if(addChip(chips, x, ChipColor.Color.BLUE))
 						isRed = true;
 				}
 			}
@@ -74,5 +74,22 @@ public class GameBoard
 	public boolean [][] getErrors()
 	{
 		return errors;
+	}
+	
+	private boolean addChip(Chip [][] chips, int column, Color c)
+	{
+		
+		for(int y = 0; y < chips.length-1; y++)
+		{
+			if(chips[column][y] == null)
+			{
+				chips[column][y] = new Chip(column * 64 + 64, y * 64 + 64, c);
+				return true;
+				
+			}
+		}
+		
+		return false;
+		
 	}
 }

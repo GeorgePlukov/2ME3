@@ -5,22 +5,7 @@ import engine.ChipColor.Color;
 abstract class Logic {
 	
 	
-	public static boolean addChip(Chip [][] chips, int column, Color c)
-	{
-		
-		for(int y = 0; y < chips.length-1; y++)
-		{
-			if(chips[column][y] == null)
-			{
-				chips[column][y] = new Chip(column * 64 + 64, y * 64 + 64, c);
-				return true;
-				
-			}
-		}
-		
-		return false;
-		
-	}
+
 	
 	public static Color checkWin(Chip [][] chips)
 	{

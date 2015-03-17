@@ -42,6 +42,8 @@ public class View {
 			sheet.draw(256, 0, 0, 3);
 		else if(Logic.isTie(chips))
 			sheet.draw(256, 0, 1, 3);
+		else
+			sheet.draw(256,  0, 1, 2);
 			
 		
 		
