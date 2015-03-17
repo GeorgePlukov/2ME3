@@ -1,6 +1,9 @@
 package engine;
 
+import org.lwjgl.input.Mouse;
 import org.newdawn.slick.geom.Point;
+
+import engine.ChipColor.Color;
 
 public class GameBoard 
 {
@@ -26,26 +29,31 @@ public class GameBoard
 
 	public void update()
 	{
-		// Check to see whether or not we are switching colors.
-		isRed = MouseInput.isRedActive(isRed);
-		
 		// Get the current mouse position.
 		Point mousePos = MouseInput.getMousePosition();
-	
-		//Get Mouse Input for Game Board Tiles
-		for (int i = 64; i < chips.length*64 + 64; i+=64)
-			for(int j = 64; j < chips[0].length*64 + 64; j+=64)
-				if(mousePos.getX() > i && mousePos.getY() > j && mousePos.getX() < i + 64 && mousePos.getY() < j + 64 && MouseInput.isButtonDown(0) && chips[(i/64)-1][(j/64)-1] == null)
+		
+		for(int x = 0; x < chips.length; x++)
+		{
+			if((mousePos.getY() > 64 && mousePos.getY() < 7 * 64) && (mousePos.getX() > x*64 + 64 && mousePos.getX() < x*64 + 128) && (Mouse.next() && !Mouse.getEventButtonState() && Mouse.getEventButton() == 0))
+			{
+				if(isRed)
 				{
-					if(isRed)
-					{
-						chips[(i/64)-1][(j/64)-1] = new Chip(i, j,  ChipColor.Color.RED);
-					}
-					else 
-					{
-						chips[(i/64)-1][(j/64)-1] = new Chip(i, j, ChipColor.Color.BLUE);
-					}
+					if(Logic.addChip(chips, x, ChipColor.Color.RED))
+						isRed = false;
+					
 				}
+				else
+				{
+					if(Logic.addChip(chips, x, ChipColor.Color.BLUE))
+						isRed = true;
+				}
+			}
+		}
+		
+//		if(Logic.winCheck(chips) == Color.RED)
+//		{
+//			System.out.println("RED WIN");
+//		}
 		
 	}
 

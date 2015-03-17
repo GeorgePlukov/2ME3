@@ -1,5 +1,7 @@
 package engine;
 
+import engine.ChipColor.Color;
+
 abstract class Logic {
 	
 	public static boolean checkValidity(Chip [][] chips, boolean [][] errors){
@@ -61,6 +63,129 @@ abstract class Logic {
 		for(int i = 0; i < errors.length; i++)
 			for(int j = 0; j < errors[0].length; j++)
 				errors[i][j] = false;
+	}
+	
+	public static boolean addChip(Chip [][] chips, int column, Color c)
+	{
+		
+		for(int y = 0; y < chips.length-1; y++)
+		{
+			if(chips[column][y] == null)
+			{
+				chips[column][y] = new Chip(column * 64 + 64, y * 64 + 64, c);
+				return true;
+				
+			}
+		}
+		
+		return false;
+		
+	}
+	
+	public static Color winCheck (Chip [][] chips)
+	{
+		boolean winCondition = false;
+		
+		for (int x = 0; x < chips.length; x++)
+		{
+			for (int y = 0; y < chips[0].length; y++)
+			{
+				Color colour = chips[x][y].getColor();
+				
+				winCondition = checkVert(chips,  colour, 1, x, y);
+				if (winCondition){return colour;}
+				winCondition = checkHor(chips,  colour, 1, x,y);
+				if (winCondition){return colour;}
+				winCondition = checkDiag(chips, colour, 1, x, y);
+				if (winCondition){return colour;}
+				
+			}
+		}
+		return null;
+	}
+
+	private static boolean checkVert (Chip[][] chips, Color colour, int count, int x, int y)
+	{
+		if (count >= 4)
+		{
+			return true;
+		}
+		
+		if (x >= chips.length)
+		{
+			return false;
+		}
+		else if (y >= chips[0].length)
+		{
+			return false;
+		}
+		else
+		{
+			if (chips[x][y].getColor() == colour)
+			{
+				return checkVert(chips, colour, count+1, x, y+1);
+			}
+			else
+			{
+				return false;
+			}
+		}
+	}
+
+	private static boolean checkHor (Chip[][] chips, Color colour, int count, int x, int y)
+	{
+		if (count >= 4)
+		{
+			return true;
+		}
+		
+		if (x >= chips.length)
+		{
+			return false;
+		}
+		else if (y >= chips[0].length)
+		{
+			return false;
+		}
+		else
+		{
+			if (chips[x][y].getColor() == colour)
+			{
+				return checkVert (chips,  colour, count+1, x+1, y);
+			}
+			else
+			{
+				return false;
+			}
+		}
+	}
+
+	private static boolean checkDiag (Chip[][] chips, Color colour, int count, int x, int y)
+	{
+		if (count >= 4)
+		{
+			return true;
+		}
+		
+		if (x >= chips.length)
+		{
+			return false;
+		}
+		else if (y >= chips[0].length)
+		{
+			return false;
+		}
+		else
+		{
+			if (chips[x][y].getColor() == colour)
+			{
+				return checkVert(chips, colour, count+1, x+1, y+1);
+			}
+			else
+			{
+				return false;
+			}
+		}
 	}
 	
 }

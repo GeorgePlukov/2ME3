@@ -1,5 +1,6 @@
 package engine;
 
+
 import engine.ChipColor.Color;
 
 
@@ -10,7 +11,7 @@ public class Chip
 	private int x, y;		//X & Y Coordinates
 	private Color color;
 	
-	public Chip(int x, int y, Color c)
+	public Chip(int x, int y,  Color c)
 	{
 		this.x = x;
 		this.y = y;
