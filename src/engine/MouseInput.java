@@ -10,9 +10,11 @@ abstract class MouseInput {
 		return new Point(Mouse.getX(), Mouse.getY());
 	}
 	
-	public static boolean isButtonDown(int i) {
-		return Mouse.isButtonDown(i);
+	public static boolean isClicked()
+	{
+		return  (Mouse.next() && !Mouse.getEventButtonState() && Mouse.getEventButton() == 0);
 	}
+
 	
 	
 }

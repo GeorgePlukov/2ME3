@@ -34,7 +34,7 @@ public class GameBoard
 		
 		for(int x = 0; x < chips.length; x++)
 		{
-			if((mousePos.getY() > 64 && mousePos.getY() < 7 * 64) && (mousePos.getX() > x*64 + 64 && mousePos.getX() < x*64 + 128) && (Mouse.next() && !Mouse.getEventButtonState() && Mouse.getEventButton() == 0))
+			if((mousePos.getY() > 64 && mousePos.getY() < 7 * 64) && (mousePos.getX() > x*64 + 64 && mousePos.getX() < x*64 + 128) && MouseInput.isClicked())
 			{
 				if(isRed)
 				{

@@ -13,6 +13,9 @@ public class View {
 		sheet.draw(0, 0, 0, 0);
 		sheet.draw(64*8, 0, 1, 0);
 		
+		//Draw Save Button
+		sheet.draw(0, 64*8, 3, 0);
+		
 		//Draw Outline for Selected Chip (Green)
 		if(game.isRedActive())
 			sheet.draw(64*8, 0, 0, 1);

@@ -15,34 +15,13 @@ import org.lwjgl.opengl.GL11;
 public class ConnectFour 
 {
 	
-	public static int MENU_STATE = 0;
-	public static int PLAY_STATE = 1;
 	
 	//Declare Variables & Objects
 	private static final int WIDTH = 576;
 	private static final int HEIGHT = 576;
 	private static final String GAME_NAME = "CONNECT FOUR";
 	private static GameBoard game;
-	private static int state;
 	
-	static 
-	{
-		state = MENU_STATE;
-	}
-	
-	public static void setState(int s) throws IOException
-	{
-		state = s;
-		
-		initDisplay();
-		initGL();
-		initGame();
-		
-		gameLoop();
-		
-		cleanUp();
-		
-	}
 	
 	
 	public static void main(String [] args) throws IOException
@@ -97,8 +76,7 @@ public class ConnectFour
 	//*Initialize Game*//
 	private static void initGame() throws IOException
 	{
-		if(state == MENU_STATE)
-			game = new MainMenu();
+		game = new GameBoard();
 	}
 	
 	//*Start Game Loop*//
