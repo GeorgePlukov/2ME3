@@ -82,110 +82,54 @@ abstract class Logic {
 		
 	}
 	
-	public static Color winCheck (Chip [][] chips)
+	public static Color checkWin(Chip [][] chips)
 	{
-		boolean winCondition = false;
-		
-		for (int x = 0; x < chips.length; x++)
-		{
-			for (int y = 0; y < chips[0].length; y++)
+		for(int i = 0; i < chips.length; i++)
+			for(int j = 0; j < chips[0].length; j++)
 			{
-				Color colour = chips[x][y].getColor();
-				
-				winCondition = checkVert(chips,  colour, 1, x, y);
-				if (winCondition){return colour;}
-				winCondition = checkHor(chips,  colour, 1, x,y);
-				if (winCondition){return colour;}
-				winCondition = checkDiag(chips, colour, 1, x, y);
-				if (winCondition){return colour;}
-				
+				Color c = check(chips, i, j);
+				if(c != null)
+					return c;
 			}
-		}
 		return null;
 	}
-
-	private static boolean checkVert (Chip[][] chips, Color colour, int count, int x, int y)
+	
+	public static Color check(Chip [][] chips, int x, int y)
 	{
-		if (count >= 4)
-		{
-			return true;
-		}
+		boolean win = false;
 		
-		if (x >= chips.length)
-		{
-			return false;
-		}
-		else if (y >= chips[0].length)
-		{
-			return false;
-		}
-		else
-		{
-			if (chips[x][y].getColor() == colour)
-			{
-				return checkVert(chips, colour, count+1, x, y+1);
-			}
-			else
-			{
-				return false;
-			}
-		}
+		win = linearMatch(chips, x, y, 1, 0)
+		|| linearMatch(chips, x, y, -1, 0)
+		|| linearMatch(chips, x, y, 0, 1)
+		|| linearMatch(chips, x, y, 0, -1)
+		|| linearMatch(chips, x, y, 1, 1)
+		|| linearMatch(chips, x, y, 1, -1)
+		|| linearMatch(chips, x, y, -1, 1)
+		|| linearMatch(chips, x, y, -1, -1);
+		
+		
+		
+		if(win)
+			return chips[x][y].getColor();
+		return null;
 	}
-
-	private static boolean checkHor (Chip[][] chips, Color colour, int count, int x, int y)
+	
+	public static boolean linearMatch(Chip [][] chips, int x, int y, int stepX, int stepY)
 	{
-		if (count >= 4)
-		{
-			return true;
-		}
 		
-		if (x >= chips.length)
+		try
+		{
+			Color val = chips[x][y].getColor();
+			for (int i = 1; i < 4; ++i)
+				if (chips[x + i * stepX][y + i * stepY].getColor() != val)
+					return false;
+		}
+		catch(Exception e)
 		{
 			return false;
 		}
-		else if (y >= chips[0].length)
-		{
-			return false;
-		}
-		else
-		{
-			if (chips[x][y].getColor() == colour)
-			{
-				return checkVert (chips,  colour, count+1, x+1, y);
-			}
-			else
-			{
-				return false;
-			}
-		}
-	}
+		return true;
 
-	private static boolean checkDiag (Chip[][] chips, Color colour, int count, int x, int y)
-	{
-		if (count >= 4)
-		{
-			return true;
-		}
-		
-		if (x >= chips.length)
-		{
-			return false;
-		}
-		else if (y >= chips[0].length)
-		{
-			return false;
-		}
-		else
-		{
-			if (chips[x][y].getColor() == colour)
-			{
-				return checkVert(chips, colour, count+1, x+1, y+1);
-			}
-			else
-			{
-				return false;
-			}
-		}
 	}
 	
 }

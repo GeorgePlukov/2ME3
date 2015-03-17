@@ -50,10 +50,15 @@ public class GameBoard
 			}
 		}
 		
-//		if(Logic.winCheck(chips) == Color.RED)
-//		{
-//			System.out.println("RED WIN");
-//		}
+		if(Logic.checkWin(chips) == Color.RED)
+		{
+			System.out.println("RED WIN");
+		}
+		
+		if(Logic.checkWin(chips) == Color.BLUE)
+		{
+			System.out.println("BLUE WIN");
+		}
 		
 	}
 
