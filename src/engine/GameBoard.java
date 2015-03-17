@@ -50,16 +50,6 @@ public class GameBoard
 			}
 		}
 		
-		if(Logic.checkWin(chips) == Color.RED)
-		{
-			//TODO: STOP GAME
-		}
-		
-		if(Logic.checkWin(chips) == Color.BLUE)
-		{
-			//TODO: STOP GAME
-		}
-		
 	}
 
 
