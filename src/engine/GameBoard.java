@@ -146,12 +146,14 @@ public class GameBoard
 				
 				for(int j = 0; j < chips[0].length; j++)
 				{
-					if(tokens[j].equals("b"))
-						chips[i][j] = new Chip(chips[i][j].getX(), chips[i][j].getY(), Color.BLUE);
-					else if(tokens[j].equals("r"))
-						chips[i][j] = new Chip(chips[i][j].getX(), chips[i][j].getY(), Color.RED);
-					else
-						chips[i][j] = null;
+					
+						if(tokens[j].equals("b"))
+							chips[i][j] = new Chip(i * 64 + 64, j * 64 + 64, Color.BLUE);
+						else if(tokens[j].equals("r"))
+							chips[i][j] = new Chip(i * 64 + 64, j * 64 + 64, Color.RED);
+						else
+							chips[i][j] = null;
+					
 				}
 			}
 		} 
