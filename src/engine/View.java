@@ -16,6 +16,12 @@ public class View {
 		//Draw Save Button
 		sheet.draw(0, 64*8, 3, 0);
 		
+		//Draw Load Button
+		sheet.draw(64*8, 64*8, 3, 1);
+		
+		//Draw Reset Button
+		sheet.draw(64*4, 64*8, 3, 2);
+		
 		//Draw Outline for Selected Chip (Green)
 		if(game.isRedActive())
 			sheet.draw(64*8, 0, 0, 1);
@@ -57,8 +63,6 @@ public class View {
 			{
 				sheet.draw(i*64, j*64, 2, 0);
 				sheet.draw(i*64, j*64, 2, 1);
-				if(game.getErrors()[i-1][j-1])
-					sheet.draw(i*64, j*64, 1, 1);
 			}
 		}
 	}

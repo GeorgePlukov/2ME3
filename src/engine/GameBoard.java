@@ -1,6 +1,10 @@
 package engine;
 
-import org.lwjgl.input.Mouse;
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.PrintWriter;
+
 import org.newdawn.slick.geom.Point;
 
 import engine.ChipColor.Color;
@@ -12,14 +16,12 @@ public class GameBoard
 	private boolean isRed = false;
 	
 	private Chip [][] chips;	//Array to Hold Chips in GameBoard
-	private boolean [][] errors;	//Array Holding Error Pointers in Grid
 
 	
 	public GameBoard()
 	{
 		//Initialize 7x6 GameBoard
 		chips = new Chip [7][6];
-		errors = new boolean [7][6];
 		
 		//Start GameBoard with Random Chip Selected. 
 		if(Math.random() > 0.5)
@@ -32,6 +34,7 @@ public class GameBoard
 		// Get the current mouse position.
 		Point mousePos = MouseInput.getMousePosition();
 		
+		//Check Columns for Clicks
 		for(int x = 0; x < chips.length; x++)
 		{
 			if((mousePos.getY() > 64 && mousePos.getY() < 7 * 64) && (mousePos.getX() > x*64 + 64 && mousePos.getX() < x*64 + 128) && MouseInput.isClicked())
@@ -50,6 +53,21 @@ public class GameBoard
 			}
 		}
 		
+		//Check Reset Click
+		if((mousePos.getY() > 8 * 64 && mousePos.getY() < 9 * 64) && (mousePos.getX() > 4 * 64 && mousePos.getX() < 5 * 64) && MouseInput.isClicked())
+		{
+			chips = new Chip [7][6];
+		}
+		//Check Save Click
+		if((mousePos.getY() > 8 * 64 && mousePos.getY() < 9 * 64) && (mousePos.getX() > 0 * 64 && mousePos.getX() < 1 * 64) && MouseInput.isClicked())
+		{
+			saveGame();
+		}
+		//Check Load Click
+		if((mousePos.getY() > 8 * 64 && mousePos.getY() < 9 * 64) && (mousePos.getX() > 8 * 64 && mousePos.getX() < 9 * 64) && MouseInput.isClicked())
+		{
+			loadGame();
+		}
 	}
 
 
@@ -61,10 +79,6 @@ public class GameBoard
 		return chips;
 	}
 	
-	public boolean [][] getErrors()
-	{
-		return errors;
-	}
 	
 	private boolean addChip(Chip [][] chips, int column, Color c)
 	{
@@ -81,5 +95,69 @@ public class GameBoard
 		
 		return false;
 		
+	}
+	
+	public void saveGame()
+	{
+		try 
+		{
+			PrintWriter writer = new PrintWriter("save.txt");
+			
+			writer.print(isRed);
+			writer.print("\n");
+			
+			for(int i = 0; i < chips.length; i++)
+			{
+				for(int j = 0; j < chips[0].length; j++)
+				{
+					if(chips[i][j] == null)
+						writer.print("_");
+					else if(chips[i][j].getColor() == Color.BLUE)
+						writer.print("b");
+					else if(chips[i][j].getColor() == Color.RED)
+						writer.print("r");
+					
+				}
+				writer.print("\n");
+			}
+					
+			
+			writer.close();
+		} 
+		catch (FileNotFoundException e) 
+		{
+			e.printStackTrace();
+		}
+	}
+	
+	public void loadGame()
+	{
+		try 
+		{
+			BufferedReader br = new BufferedReader(new FileReader("save.txt"));
+			if(br.readLine().equals("false"))
+				isRed = false;
+			else
+				isRed = true;
+			
+			for(int i = 0; i < chips.length; i++)
+			{
+				String [] tokens = br.readLine().split("(?!^)");
+				
+				for(int j = 0; j < chips[0].length; j++)
+				{
+					if(tokens[j].equals("b"))
+						chips[i][j] = new Chip(chips[i][j].getX(), chips[i][j].getY(), Color.BLUE);
+					else if(tokens[j].equals("r"))
+						chips[i][j] = new Chip(chips[i][j].getX(), chips[i][j].getY(), Color.RED);
+					else
+						chips[i][j] = null;
+				}
+			}
+		} 
+		catch (Exception e) 
+		{
+			e.printStackTrace();
+		}
 	}
 }

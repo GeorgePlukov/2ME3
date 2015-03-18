@@ -33,5 +33,4 @@ public class Chip
 		return y;
 	}
 	
-	
 }

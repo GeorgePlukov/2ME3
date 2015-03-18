@@ -19,7 +19,7 @@ abstract class Logic {
 	}
 	
 	//Checks If Chip Is Connected
-	public static Color check(Chip [][] chips, int x, int y)
+	private static Color check(Chip [][] chips, int x, int y)
 	{
 		boolean win = false;
 		
@@ -36,7 +36,7 @@ abstract class Logic {
 	}
 	
 	//Checks if 4 car connected given a certain step on X and Y where stepX and stepY must be -1, 0, 1.
-	public static boolean linearMatch(Chip [][] chips, int x, int y, int stepX, int stepY)
+	private static boolean linearMatch(Chip [][] chips, int x, int y, int stepX, int stepY)
 	{
 		
 		try
