@@ -43,14 +43,17 @@ public class View {
 		}
 		
 		
-		//Draw Win
-		
+		//Draw Who Wins
 		if(Logic.checkWin(game.getChips()) == Color.BLUE)
 			sheet.draw(256, 0, 0, 2);
 		else if(Logic.checkWin(game.getChips()) == Color.RED)
 			sheet.draw(256, 0, 0, 3);
+		
+		//Draw Is Tie
 		else if(Logic.isTie(chips))
 			sheet.draw(256, 0, 1, 3);
+		
+		//Draw Playing
 		else
 			sheet.draw(256,  0, 1, 2);
 			
