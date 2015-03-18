@@ -14,13 +14,7 @@ abstract class MouseInput {
 	
 	public static boolean isClicked()
 	{
-		//return  ( && !Mouse.getEventButtonState() && Mouse.getEventButton() == 0);
+		return  (Mouse.next() && !Mouse.getEventButtonState() && Mouse.getEventButton() == 0);
 		
-		boolean bool =  (Mouse.next() && clicked && Mouse.getEventButton() == 0);
-		clicked = Mouse.isButtonDown(0);
-		return bool;
 	}
-
-	
-	
 }
