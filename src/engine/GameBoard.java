@@ -35,20 +35,23 @@ public class GameBoard
 		Point mousePos = MouseInput.getMousePosition();
 		
 		//Check Columns for Clicks
-		for(int x = 0; x < chips.length; x++)
+		if(Logic.checkWin(chips) == null)
 		{
-			if((mousePos.getY() > 64 && mousePos.getY() < 7 * 64) && (mousePos.getX() > x*64 + 64 && mousePos.getX() < x*64 + 128) && MouseInput.isClicked())
+			for(int x = 0; x < chips.length; x++)
 			{
-				if(isRed)
+				if((mousePos.getY() > 64 && mousePos.getY() < 7 * 64) && (mousePos.getX() > x*64 + 64 && mousePos.getX() < x*64 + 128) && MouseInput.isClicked())
 				{
-					if(addChip(chips, x, ChipColor.Color.RED))
-						isRed = false;
-					
-				}
-				else
-				{
-					if(addChip(chips, x, ChipColor.Color.BLUE))
-						isRed = true;
+					if(isRed)
+					{
+						if(addChip(chips, x, ChipColor.Color.RED))
+							isRed = false;
+						
+					}
+					else
+					{
+						if(addChip(chips, x, ChipColor.Color.BLUE))
+							isRed = true;
+					}
 				}
 			}
 		}
