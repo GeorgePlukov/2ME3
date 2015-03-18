@@ -100,7 +100,7 @@ public class GameBoard
 		
 	}
 	
-	public void saveGame()
+	private void saveGame()
 	{
 		try 
 		{
@@ -133,7 +133,7 @@ public class GameBoard
 		}
 	}
 	
-	public void loadGame()
+	private void loadGame()
 	{
 		try 
 		{
@@ -162,7 +162,7 @@ public class GameBoard
 		} 
 		catch (Exception e) 
 		{
-			e.printStackTrace();
+			
 		}
 	}
 }
