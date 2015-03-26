@@ -14,6 +14,7 @@ public class GameBoard
 	
 	//Declare Variables & Objects
 	private boolean isRed = false;
+	private boolean isAI = true;
 	
 	private Chip [][] chips;	//Array to Hold Chips in GameBoard
 
@@ -35,7 +36,20 @@ public class GameBoard
 		Point mousePos = MouseInput.getMousePosition();
 		
 		//Check Columns for Clicks
-		if(Logic.checkWin(chips) == null)
+		
+		if(isAI && !isRed && Logic.checkWin(chips) == null)
+		{
+			try 
+			{
+				Thread.sleep(200);
+			}
+			catch (InterruptedException e) {}
+			int colToMove = ArtificialIntelligence.getMove(chips);
+			if (addChip(chips, colToMove, ChipColor.Color.BLUE))
+				isRed = true;
+		}
+		
+		else if(Logic.checkWin(chips) == null)
 		{
 			for(int x = 0; x < chips.length; x++)
 			{
@@ -55,6 +69,7 @@ public class GameBoard
 				}
 			}
 		}
+		
 		
 		//Check Reset Click
 		if((mousePos.getY() > 8 * 64 && mousePos.getY() < 9 * 64) && (mousePos.getX() > 4 * 64 && mousePos.getX() < 5 * 64) && MouseInput.isClicked())

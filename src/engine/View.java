@@ -13,6 +13,10 @@ public class View {
 		sheet.draw(0, 0, 0, 0);
 		sheet.draw(64*8, 0, 1, 0);
 		
+		//Draw Single/Multiplayer Buttons
+		sheet.draw(64*2, 0, 3, 3);
+		sheet.draw(64*6, 0, 2, 3);
+		
 		//Draw Save Button
 		sheet.draw(0, 64*8, 3, 0);
 		
