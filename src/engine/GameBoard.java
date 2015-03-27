@@ -86,6 +86,19 @@ public class GameBoard
 		{
 			loadGame();
 		}
+		
+		//Check Single Player Click
+		if((mousePos.getY() > 0 * 64 && mousePos.getY() < 1 * 64) && (mousePos.getX() > 2 * 64 && mousePos.getX() < 3 * 64) && MouseInput.isClicked())
+		{
+			chips = new Chip [7][6];
+			isAI = true;
+		}
+		//Check Multi-player Click
+		if((mousePos.getY() > 0 * 64 && mousePos.getY() < 1 * 64) && (mousePos.getX() > 6 * 64 && mousePos.getX() < 7 * 64) && MouseInput.isClicked())
+		{
+			chips = new Chip [7][6];
+			isAI = false;
+		}
 	}
 
 
