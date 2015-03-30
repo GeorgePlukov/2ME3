@@ -14,7 +14,7 @@ public class GameBoard
 	
 	//Declare Variables & Objects
 	private boolean isRed = false;
-	private boolean isAI = true;
+	private boolean isAI = false;
 	
 	private Chip [][] chips;	//Array to Hold Chips in GameBoard
 
