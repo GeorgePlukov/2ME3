@@ -12,12 +12,10 @@ public class ArtificialIntelligence {
 		int col = -1337;
 		
 		col = checkAIWin(chips);
-		System.out.println("AI WIN: "+col);
 		if (col != -1)
 			return col;
 		
 		col = checkPlayerWin(chips);
-		System.out.println("PLAY WIN: "+col);
 		if (col != -1)
 			return col;
 		
